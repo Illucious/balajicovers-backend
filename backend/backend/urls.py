@@ -24,5 +24,5 @@ urlpatterns = [
     # path("api/checkout/", include("checkout.urls"), name="checkout"),
     # path("api/customize/", include("customize.urls"), name="customize"),
     # path("api/feedback/", include("feedback.urls"), name="feedback"),
-    # path("api/reviews/", include("reviews.urls"), name="reviews"),
+    path("api/reviews/", include("reviews.urls"), name="reviews"),
 ]
