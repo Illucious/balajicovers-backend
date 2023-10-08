@@ -9,7 +9,7 @@ from store.models import Products
 
 class Review(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     review_title = models.CharField(max_length=100)
     review_text = models.CharField(max_length=500)
     rating = models.PositiveIntegerField(
