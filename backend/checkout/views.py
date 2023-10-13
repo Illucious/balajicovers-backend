@@ -5,9 +5,12 @@ from rest_framework.response import Response
 
 from .models import Cart, Order
 from .serializers import CartSerializer, OrderSerializer
+
 # Create your views here.
 
-@api_view(['GET'])
+
+# cart views
+@api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_cart(request):
     cart = Cart.objects.get(user=request.user)
@@ -32,3 +35,5 @@ def add_to_cart(request):
         serializer.save()
     return Response(serializer.data)
 
+
+# order views here
