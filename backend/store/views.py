@@ -41,6 +41,7 @@ def category_products(request, fk):
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
+
 @api_view(["GET"])
 def products(request, pk):
     product = Products.objects.get(id=pk)
