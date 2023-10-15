@@ -1,12 +1,8 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-
-from .models import Customize
-from .serializers import CustomizeSerializer
+from django.urls import path
+from . import views
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def customize(request):
-    ...
+urlpatterns = [
+    path("", views.customize, name="customize"),
+    path("checkout/", views.custom_order_checkout, name="custom_order_checkout"),
+]
