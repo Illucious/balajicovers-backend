@@ -42,7 +42,6 @@ def add_to_cart(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def place_order(request):
-
     cart = Cart.objects.get(user=request.user)
     if cart is not None:
         cart.checkout = True
@@ -66,5 +65,3 @@ def place_order(request):
             serializer.save(user=request.user, items=item, total=total)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-
