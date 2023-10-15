@@ -8,7 +8,7 @@ from django.contrib.postgres.fields import ArrayField
 class Customize(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="images/customize")
-    name_on_cover = models.CharField(max_length=100)
-    quantity = models.IntegerField()
+    name_on_cover = models.CharField(max_length=100, default=None)
+    quantity = models.IntegerField(default=1)
     ammount = models.DecimalField(max_digits=10, decimal_places=2)
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=10, default=None)
