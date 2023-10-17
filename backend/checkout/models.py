@@ -33,4 +33,6 @@ class Order(models.Model):
     total = models.FloatField()
 
     placed = models.BooleanField(default=False)
-    payment_intent_id = models.CharField(max_length=100, blank=True, null=True, default="")
+    payment_intent_id = models.CharField(
+        max_length=100, blank=True, null=True, default=""
+    )
