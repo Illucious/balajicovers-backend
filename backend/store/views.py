@@ -47,3 +47,9 @@ def products(request, pk):
     product = Products.objects.get(id=pk)
     serializer = ProductsSerializer(product, many=False)
     return Response(serializer.data)
+
+@api_view(["GET"])
+def search(request, query):
+    products = Products.objects.filter(name__icontains=query)
+    serializer = ProductsSerializer(products, many=True)
+    return Response(serializer.data)
