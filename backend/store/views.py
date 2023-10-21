@@ -12,29 +12,32 @@ from .serializers import (
 
 
 # Create your views here.
-@api_view(['GET'])
+@api_view(["GET"])
 def apiOverview(request):
     api_urls = {
-        'Categories': '/categories/',
-        'SubCategories': '/subcategories/',
-        'Products': '/products/',
+        "Categories": "/categories/",
+        "SubCategories": "/subcategories/",
+        "Products": "/products/",
     }
     return Response(api_urls)
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 def categories(request):
     categories = Categories.objects.all()
     serializer = CategoriesSerializer(categories, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 def subcategories(request, fk):
     subcategories = SubCategories.objects.filter(category=fk)
     serializer = SubCategoriesSerializer(subcategories, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def products(request, fk):
+
+@api_view(["GET"])
+def category_products(request, fk):
     products = Products.objects.filter(subcategory=fk)
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
@@ -71,3 +74,4 @@ def wishlist_delete(request, fk):
     wishlist = Wishlist.objects.get(product=fk)
     wishlist.delete()
     return Response("Item removed from wishlist")
+  
