@@ -5,4 +5,7 @@ urlpatterns = [
     path('', views.apiOverview, name='api-overview'),
     path('categories/', views.categories, name='categories'),
     path('subcategories/<str:fk>/', views.subcategories, name='subcategories'),
+    #wishlist
+    path('wishlist/', views.wishlist, name='wishlist'),
+    path('wishlist/delete/<str:pk>/', views.wishlist_delete, name='wishlist'),
 ]
