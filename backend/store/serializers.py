@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Categories, SubCategories, Products, Wishlist
 
 
-
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categories

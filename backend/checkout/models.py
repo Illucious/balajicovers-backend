@@ -33,7 +33,7 @@ class Order(models.Model):
     total = models.FloatField()
 
     payment_option = models.CharField(
-        max_length=50, default="COD", choices=[("COD", "COD"), ("ONLINE", "ONLINE")]
+        max_length=50, default="ONLINE", choices=[("COD", "COD"), ("ONLINE", "ONLINE")]
     )
 
     placed = models.BooleanField(default=False)

@@ -64,14 +64,14 @@ def wishlist(request):
         serializer = WishlistSerializer(wishlist, many=True)
         return Response(serializer.data)
     elif request.method == "POST":
-        serializer = WishlistSerializer(data=request.data, user = request.user)
+        serializer = WishlistSerializer(data=request.data, user=request.user)
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
-    
+
+
 @api_view(["DELETE"])
 def wishlist_delete(request, fk):
     wishlist = Wishlist.objects.get(product=fk)
     wishlist.delete()
     return Response("Item removed from wishlist")
-  
