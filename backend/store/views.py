@@ -2,11 +2,12 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Categories, SubCategories, Products
+from .models import Categories, SubCategories, Products, Wishlist
 from .serializers import (
     CategoriesSerializer,
     SubCategoriesSerializer,
     ProductsSerializer,
+    WishlistSerializer,
 )
 
 
@@ -54,3 +55,23 @@ def search(request, query):
     products = Products.objects.filter(name__icontains=query)
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
+
+
+@api_view(["GET", "POST"])
+def wishlist(request):
+    if request.method == "GET":
+        wishlist = Wishlist.objects.all(filter(user=request.user))
+        serializer = WishlistSerializer(wishlist, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = WishlistSerializer(data=request.data, user = request.user)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
+    
+@api_view(["DELETE"])
+def wishlist_delete(request, fk):
+    wishlist = Wishlist.objects.get(product=fk)
+    wishlist.delete()
+    return Response("Item removed from wishlist")
+  
