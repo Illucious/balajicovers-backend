@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from store.models import Products
+
 
 # Create your models here.
-class Cart(models.Model):
+class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    items = ArrayField(models.CharField(max_length=50), blank=True, null=True)
-    checkout = models.BooleanField(default=False)
-    total = models.FloatField()
+    product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
 
 
 class Order(models.Model):
@@ -37,6 +37,3 @@ class Order(models.Model):
     )
 
     placed = models.BooleanField(default=False)
-    payment_intent_id = models.CharField(
-        max_length=100, blank=True, null=True, default=""
-    )
