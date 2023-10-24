@@ -13,7 +13,7 @@ from .serializers import CartItemSerializer, OrderSerializer
 
 # cart views
 @api_view(["GET", "POST"])
-@permission_classes([IsAuthenticated]) 
+@permission_classes([IsAuthenticated])
 def cart(request):
     if request.method == "GET":
         cart = CartItem.objects.filter(user=request.user)
@@ -21,7 +21,7 @@ def cart(request):
         if serializer.is_valid:
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     if request.method == "POST":
         serializer = CartItemSerializer(data=request.data)
         if serializer.is_valid():
@@ -54,11 +54,11 @@ def place_order(request):
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user, items=items, total=total)
-            for product in cart: #deleting purchased products from cart
+            for product in cart:  # deleting purchased products from cart
                 product.delete()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
     if cart is None:
         """if cart is None then it means that user is placing order for a single product(might change later)"""
         item = Products.objects.get(id=request.data["product"])
@@ -68,11 +68,9 @@ def place_order(request):
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user, items=items, total=total, placed=True)
-            item.delete()  #deleting purchased product from cart
+            item.delete()  # deleting purchased product from cart
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
     # cart = Cart.objects.get(user=request.user)
     # if cart is not None:

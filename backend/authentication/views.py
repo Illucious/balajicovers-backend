@@ -2,12 +2,14 @@ from rest_framework import status
 
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
+
+# from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.models import Token
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer  # GoogleSocialAuthSerializer
 
 # Create your views here.
 
@@ -49,3 +51,13 @@ def login(request):
         return Response(
             {"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST
         )  # changed the error message
+
+
+# # login with google
+# class GoogleSocialAuthView(GenericAPIView):
+
+#     serializer_class = GoogleSocialAuthSerializer
+
+#     def post(self, request):
+#         serializer = self.serializer_class(data=request.data)
+#         serializer.is_valid(raise_exception=True)
