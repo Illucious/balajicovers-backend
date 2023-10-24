@@ -148,6 +148,10 @@ EMAIL_HOST_USER = str(os.getenv("EMAIL_HOST_USER"))  # Your Gmail address
 EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_HOST_PASSWORD"))  # Your Gmail password
 EMAIL_RECIEVER = str(os.getenv("EMAIL_RECIEVER"))
 
+# google auth settings
+GOOGLE_CLIENT_ID = str(os.getenv("GOOGLE_CLIENT_ID"))
+GOOGLE_CLIENT_SECRET = str(os.getenv("GOOGLE_CLIENT_SECRET"))
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
