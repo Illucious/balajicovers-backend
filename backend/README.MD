@@ -1,8 +1,4 @@
-- cod or online payments in model
-
-- wishlist
-
-login with google
+add a main to the bakcend of order
 
 payytm integrate
 

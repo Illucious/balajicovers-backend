@@ -37,3 +37,4 @@ class Order(models.Model):
     )
 
     placed = models.BooleanField(default=False)
+    order_id = models.CharField(max_length=100, blank=True, null=True, default=None)
