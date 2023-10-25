@@ -33,6 +33,7 @@ def payment_request(request):
     order.order_id = payment_request_id
     order.save()
 
+    return Response({"payment_url": payment_url})
 
 
 @api_view(["GET"])
