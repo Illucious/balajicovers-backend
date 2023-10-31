@@ -44,33 +44,29 @@ def delete_cart_item(request, fk):
 def place_order(request):
     cart = CartItem.objects.filter(user=request.user)
     if cart is not None:
-        items = []
-        total = 0
-        for item in cart:
-            product = Products.objects.get(id=item.product_id.id)
-            items.append(product.id)
-            total += product.price
-
-        serializer = OrderSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user, items=items, total=total)
-            for product in cart:  # deleting purchased products from cart
+        for product in cart:
+            serializer = OrderSerializer()
+            cost = product.product_id.price
+            if serializer.is_valid():
+                serializer.save(user=request.user, item=product.product_id, total=cost)
                 product.delete()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # items = []
+        # total = 0
+        # for item in cart:
+        #     product = Products.objects.get(id=item.product_id.id)
+        #     items.append(product.id)
+        #     total += product.price
+
+        # serializer = OrderSerializer(data=request.data)
+        # if serializer.is_valid():
+        #     serializer.save(user=request.user, items=items, total=total)
+        #     for product in cart:  # deleting purchased products from cart
+        #         product.delete()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if cart is None:
-        """if cart is None then it means that user is placing order for a single product(might change later)"""
-        item = Products.objects.get(id=request.data["product"])
-        items = items.append(item.id)
-        total = item.price
-
-        serializer = OrderSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user, items=items, total=total, placed=True)
-            item.delete()  # deleting purchased product from cart
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response("Cart is empty", status=status.HTTP_400_BAD_REQUEST)
 
     # cart = Cart.objects.get(user=request.user)
     # if cart is not None:
