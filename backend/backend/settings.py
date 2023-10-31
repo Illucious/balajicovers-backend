@@ -169,10 +169,10 @@ EMAIL_HOST_USER = str(os.getenv("EMAIL_HOST_USER"))  # Your Gmail address
 EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_HOST_PASSWORD"))  # Your Gmail password
 EMAIL_RECIEVER = str(os.getenv("EMAIL_RECIEVER"))
 
-# instamojo settings
-INSTAMOJO_API_KEY = str(os.getenv("INSTAMOJO_API_KEY"))
-INSTAMOJO_AUTH_TOKEN = str(os.getenv("INSTAMOJO_AUTH_TOKEN"))
-INSTAMOJO_SALT = str(os.getenv("INSTAMOJO_SALT"))
+# CCAVANUE PAYMENT GATEWAY SETTINGS
+MERCHANT_ID = str(os.getenv("MERCHANT_ID"))
+ACCESS_CODE = str(os.getenv("ACCESS_CODE"))
+WORKING_KEY = str(os.getenv("WORKING_KEY"))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

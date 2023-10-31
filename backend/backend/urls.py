@@ -27,5 +27,5 @@ urlpatterns = [
     path("api/customize/", include("customize.urls"), name="customize"),
     # path("api/feedback/", include("feedback.urls"), name="feedback"),
     path("api/reviews/", include("reviews.urls"), name="reviews"),
-    path("api/payments/", include("payments.urls"), name="payments"),
+    path("payments/", include("payments.urls"), name="payments"),
 ]
