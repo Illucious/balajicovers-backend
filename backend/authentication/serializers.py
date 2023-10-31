@@ -11,10 +11,10 @@ from . import google
 class UserSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = User
-        fields = ("id", "username", "password")
-        extra_kwargs = {
-            "password": {"write_only": True},
-        }
+        fields = ("username", "password")
+        
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
 
 
 # class GoogleSocialAuthSerializer(serializers.Serializer):

@@ -23,16 +23,16 @@ def apiOverview(request):
 
 
 @api_view(["GET"])
-def categories(request):
-    categories = Categories.objects.all()
-    serializer = CategoriesSerializer(categories, many=True)
+def categories(request, name):
+    products = Products.objects.filter(category=name)
+    serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
 
 @api_view(["GET"])
-def subcategories(request, fk):
-    subcategories = SubCategories.objects.filter(category=fk)
-    serializer = SubCategoriesSerializer(subcategories, many=True)
+def subcategories(request,name):
+    products = Products.objects.filter(subcategory=name)
+    serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
 
 

@@ -32,8 +32,8 @@ def cart(request):
 
 @api_view(["DELETE"])
 @permission_classes([IsAuthenticated])
-def delete_cart_item(request, pk):
-    cart = CartItem.objects.get(id=pk)
+def delete_cart_item(request, fk):
+    cart = CartItem.objects.get(product_id=fk, user=request.user)
     cart.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 

@@ -19,9 +19,7 @@ class Order(models.Model):
     pin_code = models.IntegerField(
         validators=[MaxValueValidator(999999), MinValueValidator(000000)]
     )
-    phone = models.IntegerField(
-        validators=[MaxValueValidator(9999999999), MinValueValidator(0000000000)]
-    )
+    phone = models.BigIntegerField()
 
     is_custom = models.BooleanField(default=False)
     name_on_cover = models.CharField(max_length=100, blank=True, null=True, default="")

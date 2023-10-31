@@ -1,6 +1,7 @@
 from rest_framework import status
 
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 
 # from rest_framework.generics import GenericAPIView
@@ -32,25 +33,29 @@ def signup(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["POST"])
-def login(request):
-    try:
-        user = User.objects.get(username=request.data["username"])
-        print("passed")
-        if user.check_password(request.data["password"]):
-            token, _ = Token.objects.get_or_create(
-                user=user
-            )  # note the tuple unpacking
-            serializer = UserSerializer(instance=user)
-            return Response(
-                {"token": token.key, "user": serializer.data}, status=status.HTTP_200_OK
-            )
+@api_view(['POST'])
+def login_view(request):
+    print("0")
+    serializer = UserSerializer(data=request.data)
+    print("1")
+
+    if serializer.is_valid():
+        print("2")
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+        user = authenticate(request, username=username, password=password)
+        print("3")
+
+        if user is not None:
+            print("4")
+            login(request, user)
+            print("5")
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key})
         else:
-            raise User.DoesNotExist
-    except User.DoesNotExist:
-        return Response(
-            {"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST
-        )  # changed the error message
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # # login with google

@@ -12,3 +12,4 @@ class Customize(models.Model):
     quantity = models.IntegerField(default=1)
     ammount = models.DecimalField(max_digits=10, decimal_places=2)
     phone = models.CharField(max_length=10, default=None)
+    phone_model = models.CharField(max_length=100, default=None)

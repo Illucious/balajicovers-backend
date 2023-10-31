@@ -18,6 +18,7 @@ def customize(request):
     quantity = request.data.get("quantity")
     ammount = request.data.get("ammount")
     phone = request.data.get("phone")
+    phone_model = request.data.get("phone_model")
     customize = Customize.objects.create(
         user=user,
         image=image,
@@ -25,6 +26,7 @@ def customize(request):
         quantity=quantity,
         ammount=ammount,
         phone=phone,
+        phone_model=phone_model,
     )
     try:
         serializer = CustomizeSerializer(customize, many=False)

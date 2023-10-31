@@ -3,7 +3,7 @@ from .views import product_review_list_create
 
 urlpatterns = [
     path(
-        "product/<int:product_id>/reviews/",
+        "<int:product_id>/",
         product_review_list_create,
         name="product-review-list-create",
     ),

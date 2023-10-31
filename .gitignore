@@ -137,4 +137,6 @@ GitHub.sublime-settings
 .history
 
 # Mics.
-README.md
+*/tips.md
+frontend/
+ENDPOINTS.md
