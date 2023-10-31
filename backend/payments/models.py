@@ -1,3 +1,27 @@
 from django.db import models
 
 # Create your models here.
+class Transaction(models.Model):
+    p_merchant_id = models.CharField(max_length=255)
+    p_order_id = models.CharField(max_length=255)
+    p_currency = models.CharField(max_length=255)
+    p_amount = models.CharField(max_length=255)
+    p_redirect_url = models.CharField(max_length=255)
+    p_cancel_url = models.CharField(max_length=255)
+    p_language = models.CharField(max_length=255)
+    p_billing_name = models.CharField(max_length=255)
+    p_billing_address = models.CharField(max_length=255)
+    p_billing_city = models.CharField(max_length=255)
+    p_billing_state = models.CharField(max_length=255)
+    p_billing_zip = models.IntegerField()
+    p_billing_country = models.CharField(max_length=255)
+    p_billing_tel = models.CharField(max_length=255)
+    p_billing_email = models.CharField(max_length=255)
+    p_delivery_name = models.CharField(max_length=255)
+    p_delivery_address = models.CharField(max_length=255)
+    p_delivery_city = models.CharField(max_length=255)
+    p_delivery_state = models.CharField(max_length=255)
+    p_delivery_zip = models.CharField(max_length=255)
+    p_delivery_country = models.CharField(max_length=255)
+    p_delivery_tel = models.CharField(max_length=255)
+    p_customer_identifier = models.CharField(max_length=255)
