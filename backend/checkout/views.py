@@ -44,26 +44,19 @@ def delete_cart_item(request, fk):
 def place_order(request):
     cart = CartItem.objects.filter(user=request.user)
     if cart is not None:
-        for product in cart:
-            serializer = OrderSerializer()
-            cost = product.product_id.price
-            if serializer.is_valid():
-                serializer.save(user=request.user, item=product.product_id, total=cost)
-                product.delete()
-        # items = []
-        # total = 0
-        # for item in cart:
-        #     product = Products.objects.get(id=item.product_id.id)
-        #     items.append(product.id)
-        #     total += product.price
+        total = 0
+        items = []
+        for item in cart:
+            items.append(item.product_id.id)
+            total += item.product_id.price
 
-        # serializer = OrderSerializer(data=request.data)
-        # if serializer.is_valid():
-        #     serializer.save(user=request.user, items=items, total=total)
-        #     for product in cart:  # deleting purchased products from cart
-        #         product.delete()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user, items=items, total=total)
+            for product in cart:  # deleting purchased products from cart
+                product.delete()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if cart is None:
         return Response("Cart is empty", status=status.HTTP_400_BAD_REQUEST)

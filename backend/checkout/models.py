@@ -30,7 +30,7 @@ class Order(models.Model):
     image = models.ImageField(
         upload_to="images/customize", blank=True, null=True, default=None
     )
-    item = models.ForeignKey(Products, on_delete=models.CASCADE)
+    items = ArrayField(models.IntegerField(), blank=True, null=True, default=None)
     total = models.FloatField()
     payment_option = models.CharField(
         max_length=50, default="ONLINE", choices=[("COD", "COD"), ("ONLINE", "ONLINE")]
