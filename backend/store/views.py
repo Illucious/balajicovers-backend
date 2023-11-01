@@ -30,7 +30,7 @@ def categories(request, name):
 
 
 @api_view(["GET"])
-def subcategories(request,name):
+def subcategories(request, name):
     products = Products.objects.filter(subcategory=name)
     serializer = ProductsSerializer(products, many=True)
     return Response(serializer.data)
