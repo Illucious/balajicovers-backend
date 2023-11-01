@@ -33,7 +33,7 @@ def signup(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def login_view(request):
     print("0")
     serializer = UserSerializer(data=request.data)
@@ -41,8 +41,8 @@ def login_view(request):
 
     if serializer.is_valid():
         print("2")
-        username = serializer.validated_data['username']
-        password = serializer.validated_data['password']
+        username = serializer.validated_data["username"]
+        password = serializer.validated_data["password"]
         user = authenticate(request, username=username, password=password)
         print("3")
 
@@ -51,9 +51,11 @@ def login_view(request):
             login(request, user)
             print("5")
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key})
+            return Response({"token": token.key})
         else:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
+            )
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
