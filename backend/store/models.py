@@ -42,3 +42,7 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Phones(models.Model):
+    model = models.CharField(max_length=50)

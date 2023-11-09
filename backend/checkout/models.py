@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from store.models import Products
+from store.models import Products, Phones
 
 # from payments.models import Transaction
 
@@ -24,6 +24,8 @@ class Order(models.Model):
     pin_code = models.IntegerField(
         validators=[MaxValueValidator(999999), MinValueValidator(000000)]
     )
+    phone_model = models.ForeignKey(Phones, on_delete=models.SET_NULL, blank=True, null=True)
+
     phone_no = models.BigIntegerField()
     is_custom = models.BooleanField(default=False)
     name_on_cover = models.CharField(max_length=100, blank=True, null=True, default="")
