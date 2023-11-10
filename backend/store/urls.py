@@ -9,4 +9,5 @@ urlpatterns = [
     # wishlist
     path("wishlist/", views.wishlist, name="wishlist"),
     path("wishlist/delete/<str:fk>/", views.wishlist_delete, name="wishlist"),
+    path("phonemodels/", views.phones, name="phonemodels"),
 ]

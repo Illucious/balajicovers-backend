@@ -24,7 +24,9 @@ class Order(models.Model):
     pin_code = models.IntegerField(
         validators=[MaxValueValidator(999999), MinValueValidator(000000)]
     )
-    phone_model = models.ForeignKey(Phones, on_delete=models.SET_NULL, blank=True, null=True)
+    phone_model = models.ForeignKey(
+        Phones, on_delete=models.SET_NULL, blank=True, null=True
+    )
 
     phone_no = models.BigIntegerField()
     is_custom = models.BooleanField(default=False)

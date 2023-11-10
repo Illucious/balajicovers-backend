@@ -2,12 +2,13 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Categories, SubCategories, Products, Wishlist
+from .models import Categories, SubCategories, Products, Wishlist, Phones
 from .serializers import (
     CategoriesSerializer,
     SubCategoriesSerializer,
     ProductsSerializer,
     WishlistSerializer,
+    PhonesSerializer,
 )
 
 
@@ -75,3 +76,11 @@ def wishlist_delete(request, fk):
     wishlist = Wishlist.objects.get(product=fk)
     wishlist.delete()
     return Response("Item removed from wishlist")
+
+
+# phone mmodel views
+@api_view(["GET"])
+def phones(request):
+    phones = Phones.objects.all()
+    serializer = PhonesSerializer(phones, many=True)
+    return Response(serializer.data)
