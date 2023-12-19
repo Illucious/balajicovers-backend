@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Categories(models.Model):
     name = models.CharField(max_length=100)
     # description = models.TextField()
-    image = models.ImageField(upload_to="images/categories/")
+    image = models.ImageField(upload_to="images/categories/", blank=True)
 
     def __str__(self):
         return self.name

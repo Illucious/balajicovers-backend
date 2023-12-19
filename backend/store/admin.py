@@ -12,6 +12,14 @@ class ProductsAdmin(admin.ModelAdmin):
     list_display = ("name", "category", "subcategory")
 
 
-admin.site.register(Categories)
-admin.site.register(SubCategories)
+class CategoriesAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
+
+class SubCategoriesAdmin(admin.ModelAdmin):
+    list_display = ("name", "category")
+    
+
+admin.site.register(Categories, CategoriesAdmin)
+admin.site.register(SubCategories, SubCategoriesAdmin)
 admin.site.register(Products, ProductsAdmin)
