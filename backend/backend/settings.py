@@ -39,6 +39,8 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     # "jet.dashboard",
     # "jet",
+    'baton',
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -55,6 +57,8 @@ INSTALLED_APPS = [
     "reviews",
     "store",
     "payments",
+
+    "baton.autodiscover",
 ]
 
 MIDDLEWARE = [
