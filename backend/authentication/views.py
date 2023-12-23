@@ -35,21 +35,20 @@ def signup(request):
 
 @api_view(["POST"])
 def login_view(request):
-    print("0")
     serializer = UserSerializer(data=request.data)
-    print("1")
 
     if serializer.is_valid():
-        print("2")
         username = serializer.validated_data["username"]
         password = serializer.validated_data["password"]
+        # print("1")
         user = authenticate(request, username=username, password=password)
-        print("3")
+        print("2")
 
-        if user is not None:
-            print("4")
-            login(request, user)
-            print("5")
+
+        if user:
+            # print("3")
+            login(request=request, user=user)
+            # print("4")
             token, _ = Token.objects.get_or_create(user=user)
             return Response({"token": token.key})
         else:
