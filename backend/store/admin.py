@@ -18,6 +18,7 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 class SubCategoriesAdmin(admin.ModelAdmin):
     list_display = ("name", "category")
+    list_filter = ("category",)
 
 
 class PhonesAdmin(admin.ModelAdmin):
