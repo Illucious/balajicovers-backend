@@ -42,7 +42,7 @@ def login_view(request):
         password = serializer.validated_data["password"]
         # print("1")
         user = authenticate(request, username=username, password=password)
-        print("2")
+        # print("2")
 
 
         if user:
